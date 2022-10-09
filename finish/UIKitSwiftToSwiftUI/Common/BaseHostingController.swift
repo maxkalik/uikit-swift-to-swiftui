@@ -8,18 +8,12 @@
 import UIKit
 import SwiftUI
 
-class BaseHostingController<ContentView: View>:
-    UIHostingController<ContentView>, BaseController {
+class BaseHostingController<ContentView: View>: UIHostingController<ContentView>, BaseController {
     
     lazy var progressView = ProgressView()
     
     override init(rootView: ContentView) {
         super.init(rootView: rootView)
-    }
-    
-    @objc
-    required dynamic public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -36,6 +30,9 @@ class BaseHostingController<ContentView: View>:
     private func setupCommon() {
         view.backgroundColor = .orange
     }
+    
+    @objc
+    required dynamic public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
-
-

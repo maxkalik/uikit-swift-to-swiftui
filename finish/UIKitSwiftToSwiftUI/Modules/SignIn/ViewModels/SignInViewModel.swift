@@ -31,7 +31,15 @@ final class SignInViewModel: ObservableObject {
     let errorAlertButtonTitle: String = "Ok"
     
     @Published var title: String = ""
-    @Published var isLoading: Bool = true
+    @Published var isLoading: Bool = false {
+        didSet {
+            if isLoading {
+                viewDelegate?.viewModelStartLoading(self)
+            } else {
+                viewDelegate?.viewModelStopLoading(self)
+            }
+        }
+    }
     @Published var shouldShowAlert: Bool = false
     @Published var name: String = "" {
         didSet(old) {
@@ -53,15 +61,6 @@ final class SignInViewModel: ObservableObject {
         print("deinit \(self)")
     }
     
-    func getData() {
-        viewDelegate?.viewModelStartLoading(self)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            self.viewDelegate?.viewModelStopLoading(self)
-            self.isLoading = false
-        }
-    }
-    
     private func prepareTitle(_ name: String = "") {
         if name.isEmpty {
             title = "Hello!"
@@ -76,7 +75,13 @@ final class SignInViewModel: ObservableObject {
             return
         }
         dependency.updated()
-        coordinatorDelegate?.viewModelDidFinish(self)
+        self.isLoading = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            self.coordinatorDelegate?.viewModelDidFinish(self)
+        }
+        
     }
     
     func errorAlertButtonTapped() {

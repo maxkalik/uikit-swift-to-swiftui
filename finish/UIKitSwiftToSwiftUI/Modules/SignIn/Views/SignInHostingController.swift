@@ -21,7 +21,6 @@ final class SignInHostingController: BaseHostingController<SignInView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootView.viewModel.viewDelegate = self
-        rootView.viewModel.getData()
     }
 }
 

@@ -13,14 +13,15 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            if viewModel.isLoading == false {
-                
+            if viewModel.isLoading {
+                EmptyView()
+            } else {
                 Text(viewModel.title)
                 TextField(
                     viewModel.textFieldPlaceholder,
                     text: $viewModel.name)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
                 Button {
                     viewModel.buttonTapped()
                 } label: {
