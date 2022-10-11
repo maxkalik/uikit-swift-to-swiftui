@@ -27,7 +27,7 @@ struct SignInView: View {
                 } label: {
                     Text(viewModel.buttonTitle)
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(Color.orange)
+                        .foregroundColor(Color.white)
                         .padding()
                 }
                 .background(Color.black)

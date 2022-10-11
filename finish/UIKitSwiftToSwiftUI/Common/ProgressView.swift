@@ -13,7 +13,6 @@ class ProgressView: UIView {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
-        activityIndicator.color = .orange
         return activityIndicator
     }()
     
@@ -33,6 +32,7 @@ class ProgressView: UIView {
         if let superview = self.superview {
             frame = CGRect(x: 0, y: 0, width: 80, height: 80)
             center = superview.center
+            activityIndicator.color = superview.backgroundColor
         }
     }
 }

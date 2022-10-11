@@ -28,7 +28,7 @@ class BaseHostingController<ContentView: View>: UIHostingController<ContentView>
     }
     
     private func setupCommon() {
-        view.backgroundColor = .orange
+        view.backgroundColor = .white
     }
     
     @objc
